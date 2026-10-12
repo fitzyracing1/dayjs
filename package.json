@@ -1,6 +1,6 @@
 {
   "name": "dayjs",
-  "version": "0.0.0-development",
+  "version": "1.11.23",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
   "types": "index.d.ts",
@@ -82,5 +82,15 @@
     "rollup-plugin-terser": "^7.0.2",
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
+  },
+  "_patchCloud": {
+    "fork": "https://github.com/fitzyracing1/dayjs",
+    "branch": "patch-cloud",
+    "upstream": "https://github.com/iamkun/dayjs",
+    "upstreamPr": "https://github.com/iamkun/dayjs/pull/2019",
+    "baseRef": "tag v1.11.23",
+    "upstreamVersion": "1.11.23",
+    "fix": "timezone plugin: .tz() reuses one cached Intl.DateTimeFormat per zone instead of calling Date#toLocaleString (which builds a new formatter every call). About 5-6x faster per .tz() call with identical results.",
+    "details": "See PATCH-CLOUD.md in this package."
   }
 }
