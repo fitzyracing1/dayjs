@@ -33,6 +33,28 @@ const getDateTimeFormat = (timezone, options = {}) => {
   return dtf
 }
 
+// Cache the formatter used by .tz(). Date#toLocaleString(locale, { timeZone })
+// builds a new Intl.DateTimeFormat on every call, which is very slow.
+// These options are exactly what toLocaleString() uses by default, so the
+// output string is identical.
+const localeStringifierCache = {}
+const getLocaleStringifier = (timezone) => {
+  let localeStringifier = localeStringifierCache[timezone]
+  if (!localeStringifier) {
+    localeStringifier = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    })
+    localeStringifierCache[timezone] = localeStringifier
+  }
+  return localeStringifier
+}
+
 export default (o, c, d) => {
   let defaultTimezone
 
@@ -96,7 +118,7 @@ export default (o, c, d) => {
     if (!this.isValid()) return this
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
+    const target = getLocaleStringifier(timezone).format(date)
     const offset = tzOffset(+date, timezone)
     const isUTC = !Number(offset)
     let ins
