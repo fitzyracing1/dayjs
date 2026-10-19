@@ -26,3 +26,22 @@ timezone plugin: .tz() reuses one cached Intl.DateTimeFormat per zone instead of
 ## Opting out
 
 Remove the patch-cloud `registry=` override and reinstall from registry.npmjs.org to get the upstream tarball.
+
+## GitHub Packages (scoped name)
+
+The same patched build can be published to GitHub Packages as `@fitzyracing1/dayjs@1.11.23`
+(GitHub Packages only accepts names scoped to the repo owner). The unscoped name `dayjs`
+is what the patch-cloud registry serves; the scoped name is what GitHub Packages serves.
+
+```ini
+# .npmrc (project or ~/.npmrc). GitHub Packages npm needs a token even for public packages:
+@fitzyracing1:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}   # a token with read:packages
+```
+
+```bash
+# keep require('dayjs') / import 'dayjs' working via an npm alias:
+npm install dayjs@npm:@fitzyracing1/dayjs@1.11.23
+# or install under the scoped name:
+npm install @fitzyracing1/dayjs@1.11.23
+```
