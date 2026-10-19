@@ -1,6 +1,13 @@
 {
-  "name": "dayjs",
+  "name": "@fitzyracing1/dayjs",
   "version": "1.11.23",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fitzyracing1/dayjs.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
   "types": "index.d.ts",
@@ -47,10 +54,6 @@
   "author": "iamkun",
   "license": "MIT",
   "homepage": "https://day.js.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iamkun/dayjs.git"
-  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
@@ -91,6 +94,9 @@
     "baseRef": "tag v1.11.23",
     "upstreamVersion": "1.11.23",
     "fix": "timezone plugin: .tz() reuses one cached Intl.DateTimeFormat per zone instead of calling Date#toLocaleString (which builds a new formatter every call). About 5-6x faster per .tz() call with identical results.",
-    "details": "See PATCH-CLOUD.md in this package."
+    "details": "See PATCH-CLOUD.md in this package.",
+    "scopedName": "@fitzyracing1/dayjs",
+    "unscopedName": "dayjs",
+    "githubPackages": "https://github.com/fitzyracing1/dayjs/pkgs/npm/dayjs"
   }
 }
